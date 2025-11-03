@@ -1,6 +1,6 @@
 services:
   init:
-    image: busybox:1.10.2
+    image: busybox:1.37.0
     command: whoami
     user: nobody
   exporter:
