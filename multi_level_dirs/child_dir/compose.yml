@@ -1,0 +1,14 @@
+services:
+  exporter:
+    image: quay.io/prometheus/node-exporter:v1.10.0
+    command:
+      # report on host, not guest
+      - --path.rootfs=/host
+    network_mode: host
+    pid: host
+    privileged: False
+    restart: unless-stopped
+    security_opt: [no-new-privileges=true]
+    user: nobody
+    volumes:
+      - /:/host:ro,rslave

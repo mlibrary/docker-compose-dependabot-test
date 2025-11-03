@@ -1,0 +1,18 @@
+services:
+  init:
+    image: busybox:1.10.2
+    command: whoami
+    user: nobody
+  exporter:
+    image: quay.io/prometheus/node-exporter:$TAG
+    command:
+      # report on host, not guest
+      - --path.rootfs=/host
+    network_mode: host
+    pid: host
+    privileged: False
+    restart: unless-stopped
+    security_opt: [no-new-privileges=true]
+    user: nobody
+    volumes:
+      - /:/host:ro,rslave
